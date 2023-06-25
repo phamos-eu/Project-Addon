@@ -15,10 +15,10 @@ class TimeSheetRecord(Document):
 
 	def validate_time(self):
 		now_time = now_datetime()
-		if now_time < get_datetime(self.from_time):
+		if self.from_time and now_time < get_datetime(self.from_time):
 			frappe.throw(_("{0} cannot be in future").format(frappe.bold("Start Time")))
 
-		if now_time < get_datetime(self.to_time):
+		if self.to_time and now_time < get_datetime(self.to_time):
 			frappe.throw(_("{0} cannot be in future").format(frappe.bold("End Time")))
 
 		if self.from_time and self.to_time and time_diff_in_seconds(self.to_time, self.from_time) < 0:
