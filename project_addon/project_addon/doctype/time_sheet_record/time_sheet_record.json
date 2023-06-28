@@ -42,13 +42,15 @@
    "fieldname": "activity_doctype",
    "fieldtype": "Link",
    "label": "Activity Doctype",
-   "options": "DocType"
+   "options": "DocType",
+   "read_only": 1
   },
   {
    "fieldname": "activity_docname",
    "fieldtype": "Dynamic Link",
    "label": "Activity Docname",
-   "options": "activity_doctype"
+   "options": "activity_doctype",
+   "read_only": 1
   },
   {
    "fieldname": "from_time",
@@ -68,14 +70,16 @@
    "default": "0",
    "fieldname": "is_billable",
    "fieldtype": "Check",
-   "label": "Is Billable"
+   "label": "Is Billable",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "completed",
    "fieldtype": "Check",
    "in_standard_filter": 1,
-   "label": "Completed"
+   "label": "Completed",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_78vsj",
@@ -122,7 +126,8 @@
   {
    "fieldname": "result",
    "fieldtype": "Small Text",
-   "label": "What I did "
+   "label": "What I did ",
+   "read_only": 1
   },
   {
    "fieldname": "actual_time",
@@ -157,13 +162,14 @@
    "fieldname": "timesheet",
    "fieldtype": "Link",
    "label": "Timesheet",
-   "options": "Timesheet"
+   "options": "Timesheet",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-25 13:26:25.327219",
+ "modified": "2023-06-27 13:22:57.495011",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Time Sheet Record",
