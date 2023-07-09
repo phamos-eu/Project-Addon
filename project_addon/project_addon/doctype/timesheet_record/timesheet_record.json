@@ -165,7 +165,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-09 08:48:49.777019",
+ "modified": "2023-07-09 09:26:15.627199",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Timesheet Record",
@@ -181,7 +181,9 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
