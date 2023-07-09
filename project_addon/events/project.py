@@ -8,7 +8,7 @@ def make_timesheet(doc):
 	if not isinstance(doc, dict):
 		doc = frappe._dict(json.loads(doc))
 
-	timesheet = frappe.new_doc("Time Sheet Record")
+	timesheet = frappe.new_doc("Timesheet Record")
 
 	timesheet.project = doc.project
 	timesheet.customer =  doc.customer
@@ -18,7 +18,7 @@ def make_timesheet(doc):
 	timesheet.expected_time =  doc.expected_time
 	timesheet.goal = doc.goal
 
-	timesheet.submit()
+	timesheet.save()
 	
 	return timesheet.name
 
