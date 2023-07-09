@@ -55,7 +55,7 @@ erpnext.project_addon.MakeTimeSheetDialog = class MakeTimeSheetDialog {
             },
             {
                 fieldname: "goal", fieldtype: "Small Text",
-                label: "What am going to do", reqd: 1, 
+                label: "Goal", reqd: 1, 
             },
 
            ]
