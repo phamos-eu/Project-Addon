@@ -96,7 +96,6 @@ erpnext.project_addon.MakeTimeSheetDialog = class MakeTimeSheetDialog {
                 if (r.exc) { frappe.msgprint(r.exc); return; }
                 if (r.message && !r.exc) {
                     frappe.set_route("Form", "Timesheet Record", r.message);
-                    // message =__('<a href="/app/Form/{0}/{1}" style="font-weight: bold;">{0} {1}</a>', ["Timesheet", r.message.name]);
                 }
             } 
         });
