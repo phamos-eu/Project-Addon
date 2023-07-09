@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestTimeSheetRecord(FrappeTestCase):
+class TestTimesheetRecord(FrappeTestCase):
 	pass

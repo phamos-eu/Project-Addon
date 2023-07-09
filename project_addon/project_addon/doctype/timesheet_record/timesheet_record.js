@@ -1,14 +1,20 @@
 // Copyright (c) 2023, Furqan Asghar and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Time Sheet Record', {
+frappe.ui.form.on('Timesheet Record', {
 	refresh: function(frm) {
-		if(frm.doc.docstatus==1 && frm.doc.status =='Submitted') {
+		if(frm.doc.docstatus==0) {
 			frm.add_custom_button(__('Mark Complete'), function() {
 				frm.trigger("mark_complete");
 			});
 		}
+
+		if(frm.is_new()) {
+			frm.set_value("from_time", frappe.datetime.now_datetime());
+			frm.refresh_field("from_time");
+		}
 	},
+	
 
 	mark_complete: function(frm) {
 		frappe.prompt([
@@ -25,7 +31,7 @@ frappe.ui.form.on('Time Sheet Record', {
 			},
 		], (values) => {
 			frappe.call({
-				method:"project_addon.project_addon.doctype.time_sheet_record.time_sheet_record.mark_complete",
+				method:"project_addon.project_addon.doctype.timesheet_record.timesheet_record.mark_complete",
 				args: {
 					"doc": frm.doc.name,
 					"result": values.result,
@@ -33,6 +39,8 @@ frappe.ui.form.on('Time Sheet Record', {
 				},
 				callback: function(r) {
 					if(!r.exc){
+						frm.refresh_field('to_time');
+						frm.refresh_field('result');
 					}
 				}
 			});
