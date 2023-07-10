@@ -40,6 +40,7 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer"
   },
@@ -65,7 +66,6 @@
   {
    "fieldname": "from_time",
    "fieldtype": "Datetime",
-   "in_standard_filter": 1,
    "label": "From Time",
    "no_copy": 1,
    "reqd": 1
@@ -80,17 +80,14 @@
   {
    "fieldname": "to_time",
    "fieldtype": "Datetime",
-   "in_standard_filter": 1,
    "label": "To Time",
-   "no_copy": 1,
-   "read_only": 1
+   "no_copy": 1
   },
   {
    "fieldname": "actual_time",
    "fieldtype": "Duration",
    "label": "Actual Time",
-   "no_copy": 1,
-   "read_only": 1
+   "no_copy": 1
   },
   {
    "fieldname": "column_break_zgqwu",
@@ -107,15 +104,13 @@
    "fieldname": "activity_doctype",
    "fieldtype": "Link",
    "label": "Activity Doctype",
-   "options": "DocType",
-   "read_only": 1
+   "options": "DocType"
   },
   {
    "fieldname": "activity_docname",
    "fieldtype": "Dynamic Link",
    "label": "Activity Docname",
-   "options": "activity_doctype",
-   "read_only": 1
+   "options": "activity_doctype"
   },
   {
    "fieldname": "section_break_hqfwm",
@@ -134,8 +129,7 @@
   {
    "fieldname": "result",
    "fieldtype": "Small Text",
-   "label": "Result",
-   "read_only": 1
+   "label": "Result"
   },
   {
    "fieldname": "amended_from",
@@ -150,7 +144,8 @@
    "fieldname": "percent_billable",
    "fieldtype": "Select",
    "label": "Percent Billable",
-   "options": "0%\n25%\n50%\n75%\n100%"
+   "options": "0%\n25%\n50%\n75%\n100%",
+   "default": "100%"
   }
  ],
  "index_web_pages_for_search": 1,
