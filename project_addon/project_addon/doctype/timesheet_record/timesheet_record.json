@@ -147,15 +147,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Timesheet Record",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "percent_billable",
    "fieldtype": "Select",
    "label": "Percent Billable",
@@ -165,7 +156,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-09 09:26:15.627199",
+ "modified": "2023-07-10 12:30:11.118879",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Timesheet Record",
