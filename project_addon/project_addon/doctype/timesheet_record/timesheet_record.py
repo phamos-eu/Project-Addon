@@ -57,6 +57,7 @@ class TimesheetRecord(Document):
 				"task": self.task
 			},
 		)
+		timesheet.employee = self.employee
 
 		timesheet.save()
 		self.db_set('timesheet', timesheet.name)

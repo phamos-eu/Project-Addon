@@ -3,7 +3,7 @@
 
 frappe.ui.form.on('Timesheet Record', {
 	refresh: function(frm) {
-		if(frm.doc.docstatus==0) {
+		if(!frm.is_new() && frm.doc.docstatus==0) {
 			frm.add_custom_button(__('Mark Complete'), function() {
 				frm.trigger("mark_complete");
 			});

@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "project",
+  "employee",
   "customer",
   "activity_type",
   "task",
@@ -100,6 +101,7 @@
    "fieldname": "timesheet",
    "fieldtype": "Link",
    "label": "Timesheet",
+   "no_copy": 1,
    "options": "Timesheet",
    "read_only": 1
   },
@@ -125,6 +127,7 @@
    "fieldname": "goal",
    "fieldtype": "Small Text",
    "label": "Goal",
+   "no_copy": 1,
    "reqd": 1
   },
   {
@@ -135,6 +138,7 @@
    "fieldname": "result",
    "fieldtype": "Small Text",
    "label": "Result",
+   "no_copy": 1,
    "read_only": 1
   },
   {
@@ -151,12 +155,18 @@
    "fieldtype": "Select",
    "label": "Percent Billable",
    "options": "0%\n25%\n50%\n75%\n100%"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-10 12:30:11.118879",
+ "modified": "2023-08-25 13:09:44.252370",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Timesheet Record",
