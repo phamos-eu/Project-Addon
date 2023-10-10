@@ -15,6 +15,25 @@ frappe.ui.form.on('Timesheet Record', {
 		}
 	},
 	
+	project: function(frm) {
+				//apply filter to task field on project field selected
+				frm.set_query("task", () => {
+					return {
+						filters: [
+							["Task", "project", "=", frm.doc.project]
+						]
+					}
+				})
+	},
+	task: function(frm) {
+		//set project if task is clicked first
+		if(!frm.doc.project){
+				frappe.db.get_value('Task', frm.doc.task, 'project', (r) => {
+					cur_frm.set_value("project",r.project);
+					});
+
+        }
+	},	
 
 	mark_complete: function(frm) {
 		frappe.prompt([
