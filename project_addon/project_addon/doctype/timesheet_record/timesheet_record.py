@@ -43,15 +43,24 @@ class TimesheetRecord(Document):
 		timesheet.customer = self.customer
 		timesheet.note = description
 
+		is_billable = False
+		perc_billable_factor = 0
+		if self.percent_billable and self.percent_billable != '0%':
+			is_billable = True
+			perc_billable_factor = float(self.percent_billable.strip('%')) / 100
+
+		hours = round(float(self.actual_time) / 3600, 6)
+		billing_hours = hours * perc_billable_factor if is_billable and perc_billable_factor else 0
 		timesheet.append(
 			"time_logs",
 			{
-				"billable": 1 if self.percent_billable else 0,
+				"is_billable": is_billable,
+				"billing_hours": billing_hours,
 				"activity_type": self.activity_type,
 				"from_time": self.from_time,
 				"to_time": self.to_time,
 				"expected_hours": round(float(self.expected_time) / 3600, 6),
-				"hours": round(float(self.actual_time) / 3600, 6),
+				"hours": hours,
 				"description": description,
 				"project": self.project,
 				"task": self.task
