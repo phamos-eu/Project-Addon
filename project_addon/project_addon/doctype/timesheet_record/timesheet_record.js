@@ -17,14 +17,14 @@ frappe.ui.form.on('Timesheet Record', {
 	},
 
 	project: function(frm) {
-		//apply filter to task field on project field selected
+		//Filter task based on project if project is selected first
 		frm.set_query("task", () => {
+			let filters = {};
+			if (frm.doc.project) filters["project"] = frm.doc.project;
 			return {
-				filters: [
-						["Task", "project", "=", frm.doc.project]
-					]
-				}
-			})
+				filters: filters
+			}
+		});
 	},
 	task: function(frm) {
 		//set project if task is clicked first
