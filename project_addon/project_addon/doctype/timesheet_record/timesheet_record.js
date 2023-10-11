@@ -30,7 +30,7 @@ frappe.ui.form.on('Timesheet Record', {
 		//set project if task is clicked first
 		if(!frm.doc.project){
 				frappe.db.get_value('Task', frm.doc.task, 'project', (r) => {
-					cur_frm.set_value("project",r.project);
+					frm.set_value("project",r.project);
 					});
 
         	}
