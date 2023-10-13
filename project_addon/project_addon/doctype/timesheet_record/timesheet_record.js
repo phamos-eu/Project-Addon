@@ -51,16 +51,17 @@ frappe.ui.form.on('Timesheet Record', {
 			},
 		], (values) => {
 			frappe.call({
-				method:"project_addon.project_addon.doctype.timesheet_record.timesheet_record.mark_complete",
+				method:"project_addon.project_addon.doctype.timesheet_record.timesheet_record.mark_complete_validate",
 				args: {
 					"doc": frm.doc.name,
 					"result": values.result,
 					"to_time": values.to_time
 				},
 				callback: function(r) {
-					if(!r.exc){
-						frm.refresh_field('to_time');
-						frm.refresh_field('result');
+					if(!r.exc && r.message.status === true){
+						frm.set_value("to_time", values.to_time);
+						frm.set_value("result", values.result);
+						frm.save();
 					}
 				}
 			});

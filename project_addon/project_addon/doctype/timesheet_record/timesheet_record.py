@@ -76,10 +76,10 @@ class TimesheetRecord(Document):
 
 
 @frappe.whitelist()
-def mark_complete(doc, result, to_time):
+def mark_complete_validate(doc, result, to_time):
 	doc = frappe.get_doc("Timesheet Record", doc)
 	doc.result = result
 	doc.to_time = to_time
 
 	doc.validate()
-	doc.save()
+	return {'status': True}
