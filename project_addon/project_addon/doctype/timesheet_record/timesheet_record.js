@@ -9,22 +9,6 @@ frappe.ui.form.on('Timesheet Record', {
 			});
 		}
 	},
-	from_time: function(frm) {
-		if (frm.doc.from_time > frappe.datetime.now_datetime()) {
-			frm.set_value("from_time",'');
-			frappe.throw(__("From time cannot be in future."));
-		}
-	},
-	to_time: function(frm) {
-		if (frm.doc.to_time > frappe.datetime.now_datetime()){
-			frm.set_value("to_time",'');
-			frappe.throw(__("To time cannot be in future."));
-		}
-		if (frm.doc.to_time < frm.doc.from_time) {
-			frm.set_value("to_time",'');
-			frappe.throw(__("To time cannot be less than from time."));
-		}
-	},
 	project: function(frm) {
 		//Filter task based on project if project is selected first
 		frm.set_query("task", () => {
@@ -58,9 +42,10 @@ frappe.ui.form.on('Timesheet Record', {
 				fieldtype: 'Small Text', reqd: 1
 			},
 		], (values) => {
-			frm.set_value("result", values.result);
-			frm.set_value("to_time", values.to_time);
-			frappe.call({
+			if (values.to_time > frm.doc.from_time) {
+				frm.set_value("result", values.result);
+				frm.set_value("to_time", values.to_time);
+				frappe.call({
 							method:"project_addon.project_addon.doctype.timesheet_record.timesheet_record.set_actual_time",
 							args: {
 								"from_time": frm.doc.from_time,
@@ -73,6 +58,10 @@ frappe.ui.form.on('Timesheet Record', {
 								}
 							}
 						});
+			}
+			else {
+				frappe.throw(__("To Time cannot be less than From Time"))
+			}		
 		})
 	}
 });

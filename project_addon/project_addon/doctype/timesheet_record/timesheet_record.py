@@ -16,12 +16,12 @@ class TimesheetRecord(Document):
 		self.create_timesheet()
 
 	def create_timesheet(self):
-		description = "{0} : {1} !".format(self.goal, self.result)
+		description = "{0} : {1}".format(self.goal, self.result)
 		actual_hours = round(float(self.actual_time) / 3600, 6)
 		timesheet = frappe.new_doc("Timesheet")
 		timesheet.update(
 			{
-				"parent_project": self.project,
+				"project": self.project,
 				"customer": self.customer,
 				"note": description,
 				"employee": self.employee
@@ -31,18 +31,19 @@ class TimesheetRecord(Document):
 			"time_logs",
 			{
 				"is_billable": 1 if self.percent_billable!="0" else 0,
+				"billing_hours": actual_hours * (float(self.percent_billable) / 100) if self.percent_billable!="0" else 0,
 				"activity_type": self.activity_type,
 				"from_time": self.from_time,
 				"to_time": self.to_time,
 				"expected_hours": round(float(self.expected_time) / 3600, 6),
 				"hours": actual_hours,
-				"billing_hours": actual_hours * (float(self.percent_billable) / 100) if self.percent_billable!="0" else 0,
 				"description": description,
 				"project": self.project,
 				"task": self.task
 			},
 		)
 		timesheet.insert()
+		self.db_set('timesheet', timesheet.name)
 		frappe.msgprint(_('Timesheet {0} Created').format(frappe.get_desk_link("Timesheet", timesheet.name)))
 
 @frappe.whitelist()
