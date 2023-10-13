@@ -38,29 +38,26 @@ class TimesheetRecord(Document):
 
 	def create_timesheet(self):
 		description = "{0} : {1}".format(self.goal, self.result)
+		actual_hours = round(float(self.actual_time) / 3600, 6)
 		timesheet = frappe.new_doc("Timesheet")
-		timesheet.project = self.project
-		timesheet.customer = self.customer
-		timesheet.note = description
 
-		is_billable = False
-		perc_billable_factor = 0
-		if self.percent_billable and self.percent_billable != '0%':
-			is_billable = True
-			perc_billable_factor = float(self.percent_billable.strip('%')) / 100
+		timesheet.update({
+				"project": self.project,
+				"customer": self.customer,
+				"employee": self.employee,
+				"note": description
+			})
 
-		hours = round(float(self.actual_time) / 3600, 6)
-		billing_hours = hours * perc_billable_factor if is_billable and perc_billable_factor else 0
 		timesheet.append(
 			"time_logs",
 			{
-				"is_billable": is_billable,
-				"billing_hours": billing_hours,
+				"is_billable": 1 if self.percent_billable!="0" else 0,
+				"billing_hours": actual_hours * (float(self.percent_billable) / 100) if self.percent_billable!="0" else 0,
 				"activity_type": self.activity_type,
 				"from_time": self.from_time,
 				"to_time": self.to_time,
 				"expected_hours": round(float(self.expected_time) / 3600, 6),
-				"hours": hours,
+				"hours": actual_hours,
 				"description": description,
 				"project": self.project,
 				"task": self.task
@@ -68,7 +65,7 @@ class TimesheetRecord(Document):
 		)
 		timesheet.employee = self.employee
 
-		timesheet.save()
+		timesheet.insert()
 		self.db_set('timesheet', timesheet.name)
 		frappe.msgprint(_('Timesheet {0} Created').format(frappe.get_desk_link("Timesheet", timesheet.name)))
 
