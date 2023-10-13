@@ -1,8 +1,7 @@
 {
  "actions": [],
- "autoname": "hash",
+ "autoname": "TR-.YYYY.-.#####",
  "creation": "2023-07-08 15:18:38.390031",
- "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -65,6 +64,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Now",
    "fieldname": "from_time",
    "fieldtype": "Datetime",
    "label": "From Time",
@@ -82,13 +82,15 @@
    "fieldname": "to_time",
    "fieldtype": "Datetime",
    "label": "To Time",
-   "no_copy": 1
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "actual_time",
    "fieldtype": "Duration",
    "label": "Actual Time",
-   "no_copy": 1
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "column_break_zgqwu",
@@ -161,11 +163,10 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-09-06 22:31:01.066101",
+ "modified": "2023-10-12 15:14:43.272041",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Timesheet Record",
- "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
@@ -184,6 +185,5 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+ "sort_order": "DESC"
 }

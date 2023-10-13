@@ -8,14 +8,23 @@ frappe.ui.form.on('Timesheet Record', {
 				frm.trigger("mark_complete");
 			});
 		}
-
-		if(frm.is_new()) {
-			frm.set_value("from_time", frappe.datetime.now_datetime());
-			frm.refresh_field("from_time");
-		}
-		
 	},
-
+	from_time: function(frm) {
+		if (frm.doc.from_time > frappe.datetime.now_datetime()) {
+			frm.set_value("from_time",'');
+			frappe.throw(__("From time cannot be in future."));
+		}
+	},
+	to_time: function(frm) {
+		if (frm.doc.to_time > frappe.datetime.now_datetime()){
+			frm.set_value("to_time",'');
+			frappe.throw(__("To time cannot be in future."));
+		}
+		if (frm.doc.to_time < frm.doc.from_time) {
+			frm.set_value("to_time",'');
+			frappe.throw(__("To time cannot be less than from time."));
+		}
+	},
 	project: function(frm) {
 		//Filter task based on project if project is selected first
 		frm.set_query("task", () => {
@@ -34,8 +43,7 @@ frappe.ui.form.on('Timesheet Record', {
 					});
 
         	}
-	},	
-	
+	},
 	mark_complete: function(frm) {
 		frappe.prompt([
 			{
@@ -50,20 +58,21 @@ frappe.ui.form.on('Timesheet Record', {
 				fieldtype: 'Small Text', reqd: 1
 			},
 		], (values) => {
+			frm.set_value("result", values.result);
+			frm.set_value("to_time", values.to_time);
 			frappe.call({
-				method:"project_addon.project_addon.doctype.timesheet_record.timesheet_record.mark_complete",
-				args: {
-					"doc": frm.doc.name,
-					"result": values.result,
-					"to_time": values.to_time
-				},
-				callback: function(r) {
-					if(!r.exc){
-						frm.refresh_field('to_time');
-						frm.refresh_field('result');
-					}
-				}
-			});
+							method:"project_addon.project_addon.doctype.timesheet_record.timesheet_record.set_actual_time",
+							args: {
+								"from_time": frm.doc.from_time,
+								"to_time": values.to_time
+							},
+							callback: function(r) {
+								if(!r.exc){
+									frm.set_value("actual_time", r.message);
+									frm.save();
+								}
+							}
+						});
 		})
 	}
 });
