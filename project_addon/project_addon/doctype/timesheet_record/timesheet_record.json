@@ -125,7 +125,6 @@
    "fieldtype": "Small Text",
    "label": "Goal",
    "no_copy": 1,
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -136,7 +135,8 @@
    "fieldname": "result",
    "fieldtype": "Small Text",
    "label": "Result",
-   "no_copy": 1
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -164,7 +164,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-10-18 15:31:20.376162",
+ "modified": "2023-10-18 15:33:37.784812",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Timesheet Record",
