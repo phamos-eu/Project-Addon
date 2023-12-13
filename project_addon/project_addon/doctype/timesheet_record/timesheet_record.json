@@ -1,8 +1,7 @@
 {
  "actions": [],
- "autoname": "hash",
+ "autoname": "TR-.YYYY.-.#####",
  "creation": "2023-07-08 15:18:38.390031",
- "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -65,6 +64,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Now",
    "fieldname": "from_time",
    "fieldtype": "Datetime",
    "label": "From Time",
@@ -82,13 +82,15 @@
    "fieldname": "to_time",
    "fieldtype": "Datetime",
    "label": "To Time",
-   "no_copy": 1
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "actual_time",
    "fieldtype": "Duration",
    "label": "Actual Time",
-   "no_copy": 1
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "column_break_zgqwu",
@@ -133,7 +135,8 @@
    "fieldname": "result",
    "fieldtype": "Small Text",
    "label": "Result",
-   "no_copy": 1
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -145,11 +148,11 @@
    "read_only": 1
   },
   {
-   "default": "100%",
+   "default": "100",
    "fieldname": "percent_billable",
    "fieldtype": "Select",
    "label": "Percent Billable",
-   "options": "0%\n25%\n50%\n75%\n100%"
+   "options": "0\n25\n50\n75\n100"
   },
   {
    "fieldname": "employee",
@@ -161,11 +164,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-09-06 22:31:01.066101",
+ "modified": "2023-10-18 15:33:37.784812",
  "modified_by": "Administrator",
  "module": "Project Addon",
  "name": "Timesheet Record",
- "naming_rule": "Random",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
